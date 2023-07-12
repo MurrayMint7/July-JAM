@@ -138,7 +138,7 @@ public class PlayerInputManager : MonoBehaviour
             //RETURN IF MENU OR UI IS OPEN
             //PERFORM DODGE
 
-            player.PlayerLocomotionManager.AttemptToPerformDodge();
+            player.playerLocomotionManager.AttemptToPerformDodge();
         }
     }
 }

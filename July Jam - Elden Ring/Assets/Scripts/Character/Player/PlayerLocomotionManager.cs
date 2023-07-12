@@ -13,8 +13,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targetRotationDirection;
-    [SerializeField] float walkingSpeed = 2;
-    [SerializeField] float runningSpeed = 5;
+    [SerializeField] float walkingSpeed = 1.5f;
+    [SerializeField] float runningSpeed = 4.5f;
     [SerializeField] float rotationSpeed = 15;
 
     [Header("Dodge")]
@@ -69,6 +69,10 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
         GetMovementValues();
 
+        if(!player.canMove){
+            return;
+        }
+
         //OUR MOVE DIRECTION IS BASED ON OUR CAMERAS FACING PERSPECTIVE & MOVEMENT INPUTS
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
         moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
@@ -88,6 +92,11 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     }
 
     private void HandleRotation(){
+
+        if(!player.canRotate){
+            return;
+        }
+
         targetRotationDirection = Vector3.zero;
         targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
         targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -108,6 +117,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         if(player.isPerformingAction){
             return;
         }
+               
 
         //IF WE ARE MOVING WHEN WE ATTEMPT TO DODGE, WE PERFORM A ROLL
         if(PlayerInputManager.instance.moveAmount > 0){
@@ -126,6 +136,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         //IF WE ARE STATIONARY, PERFORM A BACKSTEP
         else{
             //PERFORM BACKSTEP ANIM
+            player.playerAnimatorManager.PlayTargetActionAnimation("Backflip", true, true);
+
         }
         
     }

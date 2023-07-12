@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class CharacterAnimatorManager : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
     }
 
-    public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true){
-        character.animator.applyRootMotion = applyRootMotion;
+    public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false){
+        character.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
 
         //CAN BE USED TO STOP CHARACTER FROM ATTEMPTING NEW ACTIONS
@@ -27,5 +28,10 @@ public class CharacterAnimatorManager : MonoBehaviour
         //THIS FLAG WILL TURN TRUE IF YOU ARE STUNNED
         //WE CAN THEN CHECK FOR THIS BEFORE ATTEMPTING NEW ACTIONS
         character.isPerformingAction = isPerformingAction;
+        character.canRotate = canRotate;
+        character.canMove = canMove;
+
+        //TELL THE SERVER/HOST THAT WE PLAYED AN ANIMATION, AND TO PLAY THE ANIM FOR EVERYONE ELSE
+        character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
     }
 }
