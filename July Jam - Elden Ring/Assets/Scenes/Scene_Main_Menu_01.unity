@@ -1534,6 +1534,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7533471858189161868, guid: 1e50ddbd4d23aaa40bf31784701eace9,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 7079881339910569649, guid: db50a7fa403c8c94487f55c6a474d604,
+        type: 3}
     - target: {fileID: 7533471858189161869, guid: 1e50ddbd4d23aaa40bf31784701eace9,
         type: 3}
       propertyPath: m_RootOrder
@@ -1603,6 +1609,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8297052961365265812, guid: cb782f6323857cb44984551a266268aa,
+        type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 1053847814487947082, guid: db50a7fa403c8c94487f55c6a474d604,
+        type: 3}
     - target: {fileID: 8297052961365265813, guid: cb782f6323857cb44984551a266268aa,
         type: 3}
       propertyPath: m_RootOrder

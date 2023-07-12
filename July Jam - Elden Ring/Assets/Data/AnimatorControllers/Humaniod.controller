@@ -135,7 +135,8 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c7237f601895595479e184f94ec91573, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: b8406180c634e14488fe9d253e76aad6,
+      type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -143,7 +144,8 @@ BlendTree:
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 226aa93a5777f004bb649d01338b7017, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 50cea9009faf74f47bfe9500259e65a7,
+      type: 3}
     m_Threshold: 0.13333334
     m_Position: {x: 0, y: -0.5}
     m_TimeScale: 1
@@ -151,7 +153,7 @@ BlendTree:
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: d255a0136a9ff494d8888958cbf5532d,
+    m_Motion: {fileID: -203655887218126122, guid: f9de179081e8a20489727f539d040dd3,
       type: 3}
     m_Threshold: 0.26666668
     m_Position: {x: 0, y: 0.5}
@@ -160,7 +162,8 @@ BlendTree:
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: bd76386116745364298bce0a8b98b8a7, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 8649b73aef137fd48b9c9b6e2d12609c,
+      type: 3}
     m_Threshold: 0.40000004
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -168,7 +171,8 @@ BlendTree:
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 202942bb92143f44f83052c5cb706941, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 918022fc00981964cb61347c4c0904fe,
+      type: 3}
     m_Threshold: 0.53333336
     m_Position: {x: 0.5, y: 0}
     m_TimeScale: 1
@@ -176,7 +180,8 @@ BlendTree:
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 613fcf50e1a271d4b8d4dcca2fe9e038, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 292b16c6e8003fd4db792cff7ad45320,
+      type: 3}
     m_Threshold: 0.6666667
     m_Position: {x: -0.5, y: 0}
     m_TimeScale: 1
