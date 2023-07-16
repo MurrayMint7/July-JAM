@@ -25,6 +25,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("PLAYER ACTIONS")]
     [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
 
     private void Awake() {
 
@@ -69,6 +70,12 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+            //HOLDING THE INPUT, SETS THE BOOL TO TRUE
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+
+            //RELEASING THE INPUT, SETS THE BOOL TO FALSE
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -98,6 +105,7 @@ public class PlayerInputManager : MonoBehaviour
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
         HandleDodgeInput();
+        HandleSprinting();
     }
     
     //MOVEMENT
@@ -116,7 +124,7 @@ public class PlayerInputManager : MonoBehaviour
         }
 
         //WE PASS 0 ON THE HORIZONTAL AS WE ONLY WANT TO STRAFE WHEN WE ARE LOCKED ONTO AN EMEMY
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
 
         if(player == null){
             return;
@@ -139,6 +147,16 @@ public class PlayerInputManager : MonoBehaviour
             //PERFORM DODGE
 
             player.playerLocomotionManager.AttemptToPerformDodge();
+        }
+    }
+
+    private void HandleSprinting(){
+        if(sprintInput){
+            //HANDLE STRINTING
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else{
+            player.playerNetworkManager.isSprinting.Value = false;
         }
     }
 }

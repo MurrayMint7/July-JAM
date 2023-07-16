@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 1966656284980579811}
   - component: {fileID: -3491246323090868224}
   - component: {fileID: 1582367894630173536}
+  - component: {fileID: 4405085187837476229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -269,6 +270,8 @@ MonoBehaviour:
   canMove: 1
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
 --- !u!114 &3525139635489646521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +296,14 @@ MonoBehaviour:
   verticalMovement:
     m_InternalValue: 0
   moveAmount:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  endurance:
+    m_InternalValue: 1
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
     m_InternalValue: 0
 --- !u!114 &2986723050404902883
 MonoBehaviour:
@@ -339,9 +350,11 @@ MonoBehaviour:
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
-  walkingSpeed: 2
-  runningSpeed: 5
+  walkingSpeed: 1.5
+  runningSpeed: 4.5
+  sprintingSpeed: 10
   rotationSpeed: 15
+  sprintingStaminaCost: 2
 --- !u!82 &-3491246323090868224
 AudioSource:
   m_ObjectHideFlags: 0
@@ -450,6 +463,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a1b08589ce63f42a65082e9867c45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4405085187837476229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053847814487947082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f960d26f08e03428474efaa77887b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaRegenerationAmount: 2
+  staminaRegenerationDelay: 2
 --- !u!1 &1221633932997328374
 GameObject:
   m_ObjectHideFlags: 0

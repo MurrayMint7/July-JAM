@@ -6,8 +6,12 @@ using Unity.Netcode;
 public class PlayerUIManager : MonoBehaviour
 {
     public static PlayerUIManager instance;
+
     [Header("NETWORK JOIN")]
     [SerializeField] bool startGameAsClient;
+
+    [SerializeField] public PlayerUIHUDManager playerUIHUDManager;
+
 
     private void Awake() {
         if(instance == null){
@@ -16,6 +20,8 @@ public class PlayerUIManager : MonoBehaviour
         else{
             Destroy(gameObject);
         }
+
+        playerUIHUDManager = GetComponentInChildren<PlayerUIHUDManager>();
     }
 
     private void Start() {
