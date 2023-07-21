@@ -21,7 +21,7 @@ public class CharacterStatsManager : MonoBehaviour
 
         //CREATE AN EQUATION FOR HOW YOU WANT STAMINA TO BE CALCULATED
 
-        stamina = endurance * 10;
+        stamina = endurance * 100;
 
         return Mathf.RoundToInt(stamina);
     }
