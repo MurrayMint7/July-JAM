@@ -16,10 +16,20 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] Button loadMenuReturnButton;
     [SerializeField] Button mainMenuLoadGameButton;
     [SerializeField] Button mainMenuNewGameButton;
+    [SerializeField] Button deleteCharacterPopUpConfirmButton;
+    [SerializeField] Button noCharacterSlotsOkayButton;
+
 
     [Header("Pop Ups")]
     [SerializeField] GameObject noCharacterSlotsPopUp;
-    [SerializeField] Button noCharacterSlotsOkayButton;
+    [SerializeField] GameObject deleteCharacterSlotPopUp;
+
+
+    [Header("Character Slots")]
+    public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
+
+    
+
 
     private void Awake(){
         if(instance == null){
@@ -62,5 +72,38 @@ public class TitleScreenManager : MonoBehaviour
     public void CloseNoFreeCharacterSlotsPopUp(){
         noCharacterSlotsPopUp.SetActive(false);
         mainMenuNewGameButton.Select();
+    }
+
+    //CHARACTER SLOTS
+
+    public void SelectCharacterSlot(CharacterSlot characterSlot){
+        currentSelectedSlot = characterSlot;
+    }
+
+    public void SelectNoSlot(){
+        currentSelectedSlot = CharacterSlot.NO_SLOT;
+    }
+
+    public void AttemptToDeleteCharacterSlot(){
+        if(currentSelectedSlot != CharacterSlot.NO_SLOT){
+            deleteCharacterSlotPopUp.SetActive(true);
+            deleteCharacterPopUpConfirmButton.Select();
+        }
+    }
+
+    public void DeleteCharacterSlot(){
+        deleteCharacterSlotPopUp.SetActive(false);
+        WorldSaveGameManager.instance.DeleteGame(currentSelectedSlot);
+        
+        //DISABLE THEN ENABLE THE LOAD MENU TO REFRESH THE SLOTS AFTER DELETING ONE
+        loadMenu.SetActive(false);
+        loadMenu.SetActive(true);
+        
+        loadMenuReturnButton.Select();  
+    }
+
+    public void CloseDeleteCharacterPopUp(){
+        deleteCharacterSlotPopUp.SetActive(false);
+        loadMenuReturnButton.Select();
     }
 }

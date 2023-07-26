@@ -12,6 +12,8 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
 
         player = GetComponent<PlayerManager>();
     }
+
+    //called every frame of an animation
     private void OnAnimatorMove() {
         if(player.applyRootMotion){
             Vector3 velocity = player.animator.deltaPosition;

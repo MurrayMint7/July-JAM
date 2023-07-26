@@ -18,5 +18,5 @@ public enum CharacterSlot{
     CharacterSlot08,
     CharacterSlot09,
     CharacterSlot10,
-
+    NO_SLOT,
 }

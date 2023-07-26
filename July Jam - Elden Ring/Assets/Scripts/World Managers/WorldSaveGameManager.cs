@@ -135,6 +135,102 @@ public class WorldSaveGameManager : MonoBehaviour
             return;
         }
 
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot03);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot03;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot04);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot04;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot05);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot05;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot06);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot06;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot07);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot07;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot08);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot08;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot09);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot09;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        //CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot10);
+
+        if(!saveFileDataWriter.CheckToSeeIfFileExists()){
+
+            //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot10;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
         //NOTIFY IF ALL SLOTS ARE FULL
         TitleScreenManager.instance.DisplayNoFreeCharacterSlotsPopUp();      
     }
@@ -161,6 +257,15 @@ public class WorldSaveGameManager : MonoBehaviour
         //WRITE THAT INFO ONTO A JSON FILE, SAVED TO THIS MACHINE
         saveFileDataWriter.CreateNewCharacterSaveFile(currentCharacterData);
 
+    }
+
+    public void DeleteGame(CharacterSlot characterSlot){
+        //CHOOSE A FILE TO DELETE BASED ON THE NAME
+        saveFileDataWriter = new SaveFileDataWriter();
+        saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(characterSlot);
+
+        saveFileDataWriter.DeleteSaveFile();
     }
 
     //LOAD ALL CHARACTER PROFILES ON DEVICE WHEN STARTING GAME
@@ -201,8 +306,13 @@ public class WorldSaveGameManager : MonoBehaviour
     }
 
     public IEnumerator LoadWorldScene(){
+        
+        //IF YOU WANT 1 WORLD SCENE USE THIS
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
 
+        //IF YOU WANT TO USE DIFFERENT SCENES FOR LEVELS IN YOUR PROJECT USE THIS
+        //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+        
         player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
         yield return null;
     }

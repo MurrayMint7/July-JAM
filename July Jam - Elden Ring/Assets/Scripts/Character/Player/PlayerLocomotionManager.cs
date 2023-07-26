@@ -23,6 +23,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
+    [SerializeField] float jumpStaminaCost = 25;
 
 
     protected override void Awake()
@@ -97,9 +98,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
                 player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
 
             }
-        }
-
-        
+        }       
     }
 
     private void HandleRotation(){
@@ -185,5 +184,38 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
         
     }
-  
+    
+    public void AttemptToPerformJump(){
+
+        //IF WE ARE PERFORMING AN ACTION, WE DONT WANT TO BE ABLE TO JUMP (WILL CHANGE WHEN COMBAT IS ADDED)
+        if(player.isPerformingAction){
+            return;
+        }
+
+        //IF WE ARE OUT OF STAMINA, WE DO NOT WANT TO JUMP
+        if (player.playerNetworkManager.currentStamina.Value <= 0) {
+            return;
+        }
+
+        //IF WE ARE ALREADY IN A JUMP, WE DO NOT WANT TO JUMP
+        if(player.isJumping){
+            return;
+        }
+
+        //IF WE ARE NOT GROUNDED, WE DO NOT WANT TO ALLOW A JUMP
+        if(player.isGrounded){
+            return;
+        }
+
+        //IF WE ARE TWO HANDING OUR WEAPON, PLAY TWO HANDED JUMP ANIM, OTHERWISE PLAY ONE HANDED ANIM (TO-DO)
+        player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_Start", false);
+
+        player.isJumping = true;
+        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;           
+    }
+
+    public void ApplyJumpingVelocity(){
+        //APPLY AN UPWARD VELOCITY
+    }
+
 }
