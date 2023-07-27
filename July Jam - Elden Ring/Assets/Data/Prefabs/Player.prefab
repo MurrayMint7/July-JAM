@@ -631,14 +631,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9be16bd17bed4246a5c9714744beea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityForce: -2
+  gravityForce: -4.02
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheckSphereRadius: 0.2
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
-  fallStartYVelocity: -2
+  fallStartYVelocity: -10
+  inAirTimer: 0
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -647,8 +648,9 @@ MonoBehaviour:
   sprintingSpeed: 10.5
   rotationSpeed: 15
   sprintingStaminaCost: 2
-  dodgeStaminaCost: 25
+  jumpHeight: 1
   jumpStaminaCost: 25
+  dodgeStaminaCost: 25
 --- !u!114 &2463664532554838915
 MonoBehaviour:
   m_ObjectHideFlags: 0

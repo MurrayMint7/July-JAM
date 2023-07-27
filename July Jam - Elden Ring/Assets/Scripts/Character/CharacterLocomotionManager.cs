@@ -8,14 +8,14 @@ public class CharacterLocomotionManager : MonoBehaviour
     CharacterManager character;
 
     [Header("Ground & Jumping")]
-    [SerializeField] float gravityForce = -5.55f;
+    [SerializeField] protected float gravityForce = -5.55f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float groundCheckSphereRadius = 1;
     [SerializeField] protected Vector3 yVelocity; // THE FORCE AT WHICH THE CHRACTER IS PULLED UP OR DOWN
     [SerializeField] protected float groundedYVelocity = -20; //THE FORCE AT WHICH THE CHARACTER IS PULLED DOWN WHEN GROUNDED
     [SerializeField] protected float fallStartYVelocity = -5; //THE FORCE AT WHICH THE CHARACTER IS PULLED DOWN WHEN FALLING
     protected bool fallingVelocityHasBeenSet = false; 
-    protected float inAirTimer = 0;
+    [SerializeField] protected float inAirTimer = 0;
 
     protected virtual void Awake(){
         character = GetComponent<CharacterManager>();
@@ -35,7 +35,7 @@ public class CharacterLocomotionManager : MonoBehaviour
         }
         else{
             //IF WE ARE NOT JUMPING, AND OUR FALLING VELOCUTY HAS NOT BEEN SET
-            if(character.isJumping && !fallingVelocityHasBeenSet){
+            if(!character.isJumping && !fallingVelocityHasBeenSet){
                 fallingVelocityHasBeenSet = true;
                 yVelocity.y = fallStartYVelocity;
             }

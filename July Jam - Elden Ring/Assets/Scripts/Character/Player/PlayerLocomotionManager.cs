@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,19 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     [SerializeField] float runningSpeed = 2.5f;
     [SerializeField] float sprintingSpeed = 10.5f;
     [SerializeField] float rotationSpeed = 15;
-
     [SerializeField] float sprintingStaminaCost = 2;
+
+    [Header("Jumping")]
+    [SerializeField] float jumpHeight = 4;
+    [SerializeField] float jumpStaminaCost = 25;
+    [SerializeField] float jumpForwardSpeed = 2.5f;
+    [SerializeField] float freeFallSpeed = 1.5f;
+    private Vector3 jumpDirection;
+
 
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
-    [SerializeField] float jumpStaminaCost = 25;
 
 
     protected override void Awake()
@@ -60,7 +67,8 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         HandleGroundedMovement();
         HandleRotation();
         //AERIAL MOVEMENT
-        
+        HandleAerialMovement();
+        HandleFreeFallMovement();
     }
 
     private void GetMovementValues(){
@@ -99,6 +107,24 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
             }
         }       
+    }
+
+    private void HandleAerialMovement(){
+        if(player.isJumping){
+            player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+        }
+    }
+
+    private void HandleFreeFallMovement(){
+        if(!player.isGrounded){
+            Vector3 freeFallDirection;
+            
+            freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.verticalInput;
+            freeFallDirection = freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontalInput;
+            freeFallDirection.y = 0;
+
+            player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
+        }
     }
 
     private void HandleRotation(){
@@ -203,7 +229,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         }
 
         //IF WE ARE NOT GROUNDED, WE DO NOT WANT TO ALLOW A JUMP
-        if(player.isGrounded){
+        if(!player.isGrounded){
             return;
         }
 
@@ -211,11 +237,35 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_Start", false);
 
         player.isJumping = true;
-        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;           
+        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;  
+
+        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
+        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
+
+        jumpDirection.y = 0;
+
+        if(jumpDirection != Vector3.zero){
+            //IF WE ARE SPRINTING, JUMP DIRECTION IS AT FULL DISTANCE
+            if(player.playerNetworkManager.isSprinting.Value){
+                jumpDirection *= 1;
+            }         
+
+            //IF WE ARE RUNNING, JUMP AT HALF DISTANCE
+            else if(PlayerInputManager.instance.moveAmount > 0.5){
+                jumpDirection *= 0.5f;
+            }
+
+            //IF WE ARE WALKING JUMP AT QUARTER DISTANCE
+            else if(PlayerInputManager.instance.moveAmount <= 0.5){
+                jumpDirection *= 0.25f;
+            }
+        }
+        
     }
 
     public void ApplyJumpingVelocity(){
         //APPLY AN UPWARD VELOCITY
+        yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
     }
 
 }
