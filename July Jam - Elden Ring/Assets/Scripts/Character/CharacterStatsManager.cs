@@ -16,7 +16,17 @@ public class CharacterStatsManager : MonoBehaviour
         character = GetComponent<CharacterManager>();
     }
 
-    public int CalculateStaminaBasedOnLevel(int endurance){
+    public int CalculateHealthBasedOnVitalityLevel(int vitality){
+        float health = 0;
+
+        //CREATE AN EQUATION FOR HOW YOU WANT STAMINA TO BE CALCULATED
+
+        health = vitality * 150;
+
+        return Mathf.RoundToInt(health);
+    }
+
+    public int CalculateStaminaBasedOnEnduranceLevel(int endurance){
         float stamina = 0;
 
         //CREATE AN EQUATION FOR HOW YOU WANT STAMINA TO BE CALCULATED
@@ -60,7 +70,6 @@ public class CharacterStatsManager : MonoBehaviour
         //WE ONLY WANT TO RESET THE REGENERATION IF WE ARE ALREADY REGENERATING STAMINA
         if(currentStaminaAmount < previousStaminaAmount){
             staminaRegenerationTimer = 0;
-
         }
     }
 }
