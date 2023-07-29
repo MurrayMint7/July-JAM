@@ -76,11 +76,11 @@ public class PlayerManager : CharacterManager
         currentCharacterData.yPos = transform.position.y;
         currentCharacterData.zPos = transform.position.z;
 
-        currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
         currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
+        currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
 
-        currentCharacterData.vitality = PlayerNetworkManager.vitality.Value;
-        currentCharacterData.endurance = PlayerNetworkManager.endurance.Value;
+        currentCharacterData.vitality = playerNetworkManager.vitality.Value;
+        currentCharacterData.endurance = playerNetworkManager.endurance.Value;
     }
 
     public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData){
@@ -92,10 +92,10 @@ public class PlayerManager : CharacterManager
         playerNetworkManager.endurance.Value = currentCharacterData.endurance;
 
         //THIS WILL BE MOVED WHEN SAVING AND LOADING IS ADDED
-        playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnLevel(playerNetworkManager.vitality.Value);
-        playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnLevel(playerNetworkManager.endurance.Value);
-        playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
+        playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vitality.Value);
+        playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
         playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
+        playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
         PlayerUIManager.instance.playerUIHUDManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
 
     }

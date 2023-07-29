@@ -16,12 +16,16 @@ public class CharacterStatsManager : MonoBehaviour
         character = GetComponent<CharacterManager>();
     }
 
+    protected virtual void Start(){
+
+    }
+
     public int CalculateHealthBasedOnVitalityLevel(int vitality){
         float health = 0;
 
         //CREATE AN EQUATION FOR HOW YOU WANT STAMINA TO BE CALCULATED
 
-        health = vitality * 150;
+        health = vitality * 15;
 
         return Mathf.RoundToInt(health);
     }
@@ -31,7 +35,7 @@ public class CharacterStatsManager : MonoBehaviour
 
         //CREATE AN EQUATION FOR HOW YOU WANT STAMINA TO BE CALCULATED
 
-        stamina = endurance * 100;
+        stamina = endurance * 10;
 
         return Mathf.RoundToInt(stamina);
     }

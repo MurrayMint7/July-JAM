@@ -112,8 +112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -612.15283, y: 264}
-  m_SizeDelta: {x: 599.7455, y: 301.5548}
+  m_AnchoredPosition: {x: -523.43945, y: 273}
+  m_SizeDelta: {x: 808.9042, y: 467.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515352805166365323
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
     m_Top: 25
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -443,7 +443,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1379984458688125360
 MonoBehaviour:
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80e4832eb324cc40a3d73e7645af090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 8284024263461604922}
   staminaBar: {fileID: 844519520775131837}
 --- !u!1 &5281783022753287841
 GameObject:
@@ -611,7 +611,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2738132015459168084
 MonoBehaviour:
@@ -676,6 +676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928722960006a1c4199a64b8cf681a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleBarLengthWithStats: 1
+  widthScaleMultiplier: 1.3
 --- !u!1 &6526644704377148707
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +717,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5571989099812230804
 MonoBehaviour:
@@ -780,6 +782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928722960006a1c4199a64b8cf681a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleBarLengthWithStats: 1
+  widthScaleMultiplier: 1.5
 --- !u!1 &7010709917394675379
 GameObject:
   m_ObjectHideFlags: 0

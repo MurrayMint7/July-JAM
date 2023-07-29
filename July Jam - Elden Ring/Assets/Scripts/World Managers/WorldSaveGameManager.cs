@@ -119,7 +119,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot01;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -131,7 +131,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot02;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -143,7 +143,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot03;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -155,7 +155,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot04;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -167,7 +167,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot05;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -179,7 +179,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot06;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -191,7 +191,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot07;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -203,7 +203,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot08;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -215,7 +215,7 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot09;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
@@ -227,12 +227,18 @@ public class WorldSaveGameManager : MonoBehaviour
             //IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
             currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot10;
             currentCharacterData = new CharacterSaveData();
-            StartCoroutine(LoadWorldScene());
+            NewGame();
             return;
         }
 
         //NOTIFY IF ALL SLOTS ARE FULL
         TitleScreenManager.instance.DisplayNoFreeCharacterSlotsPopUp();      
+    }
+
+    private void NewGame(){
+        //SAVES THE NEWLY CREATED CHARACTERS STATS, AND ITEMS
+        SaveGame();
+        StartCoroutine(LoadWorldScene());
     }
 
     public void LoadGame(){
