@@ -237,6 +237,8 @@ public class WorldSaveGameManager : MonoBehaviour
 
     private void NewGame(){
         //SAVES THE NEWLY CREATED CHARACTERS STATS, AND ITEMS
+        player.playerNetworkManager.vitality.Value = 15;
+        player.playerNetworkManager.endurance.Value = 10;
         SaveGame();
         StartCoroutine(LoadWorldScene());
     }
