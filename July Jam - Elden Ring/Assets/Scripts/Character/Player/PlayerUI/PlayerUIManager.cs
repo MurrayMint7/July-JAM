@@ -11,6 +11,7 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] bool startGameAsClient;
 
     [SerializeField] public PlayerUIHUDManager playerUIHUDManager;
+    [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
 
 
     private void Awake() {
@@ -22,6 +23,7 @@ public class PlayerUIManager : MonoBehaviour
         }
 
         playerUIHUDManager = GetComponentInChildren<PlayerUIHUDManager>();
+        playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
     }
 
     private void Start() {

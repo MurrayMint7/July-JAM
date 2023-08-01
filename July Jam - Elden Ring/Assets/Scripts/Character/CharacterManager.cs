@@ -13,6 +13,7 @@ public class CharacterManager : NetworkBehaviour
 
     [HideInInspector] public CharacterNetworkManager characterNetworkManager;
     [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+    [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
 
     [Header("Flags")]
     public bool isPerformingAction = false;
@@ -30,6 +31,7 @@ public class CharacterManager : NetworkBehaviour
         animator = GetComponent<Animator>();
         characterNetworkManager = GetComponent<CharacterNetworkManager>();
         characterEffectsManager = GetComponent<CharacterEffectsManager>();
+        characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
     }
 
     protected virtual void Update(){
@@ -53,10 +55,36 @@ public class CharacterManager : NetworkBehaviour
         }
     }
 
-    protected virtual void LateUpdate() {
+    protected virtual void LateUpdate(){
         
     }
 
-    
+    public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDamageAnimation = false){
+        if(IsOwner){
+            characterNetworkManager.currentHealth.Value = 0;
+            isDead.Value = true;
+
+            //RESENT ANY FLAGS HERE THAT NEED TO BE RESET
+
+            //IF WE ARE NOT GROUNDED, PLAY AERIAL DEATH ANIMATION
+
+            if(!manuallySelectDamageAnimation){
+                characterAnimatorManager.PlayTargetActionAnimation("Death", true);
+
+            }
+        }
+
+        //PLAY DEATH SOUND FX
+
+        yield return new WaitForSeconds(3);
+
+        //AWARD POINTS FOR PLAYER
+
+        //DISABLE CHARACTER
+    }  
+
+    public virtual void ReviveCharacter(){
+        
+    }
 
 }

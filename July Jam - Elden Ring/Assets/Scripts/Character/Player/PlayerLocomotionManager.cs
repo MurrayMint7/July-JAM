@@ -16,13 +16,13 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     private Vector3 targetRotationDirection;
     [SerializeField] float walkingSpeed = 1.5f;
     [SerializeField] float runningSpeed = 2.5f;
-    [SerializeField] float sprintingSpeed = 10.5f;
+    [SerializeField] float sprintingSpeed = 4.5f;
     [SerializeField] float rotationSpeed = 15;
     [SerializeField] float sprintingStaminaCost = 2;
 
     [Header("Jumping")]
     [SerializeField] float jumpHeight = 4;
-    [SerializeField] float jumpStaminaCost = 25;
+    [SerializeField] float jumpStaminaCost = 10;
     [SerializeField] float jumpForwardSpeed = 2.5f;
     [SerializeField] float freeFallSpeed = 1.5f;
     private Vector3 jumpDirection;
@@ -30,7 +30,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
 
     [Header("Dodge")]
     private Vector3 rollDirection;
-    [SerializeField] float dodgeStaminaCost = 25;
+    [SerializeField] float dodgeStaminaCost = 10;
 
 
     protected override void Awake()
@@ -203,7 +203,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         //IF WE ARE STATIONARY, PERFORM A BACKSTEP
         else{
             //PERFORM BACKSTEP ANIM
-            player.playerAnimatorManager.PlayTargetActionAnimation("Backflip", true, true);
+            player.playerAnimatorManager.PlayTargetActionAnimation("Backstep", true, true);
 
         }
 

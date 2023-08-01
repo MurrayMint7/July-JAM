@@ -30,12 +30,27 @@ public class CharacterNetworkManager : NetworkBehaviour
     [Header("Resources")]
     public NetworkVariable<float> currentStamina =  new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<int> maxStamina =  new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public NetworkVariable<float> currentHealth =  new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> currentHealth =  new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<int> maxHealth =  new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     protected virtual void Awake() {
         character = GetComponent<CharacterManager>();
     }
+
+    public void CheckHP(int oldValue, int newValue){
+        if(currentHealth.Value <= 0){
+            StartCoroutine(character.ProcessDeathEvent());
+        }
+
+        //PREVENTS OVERHEALING
+
+        if(character.IsOwner){
+            if(currentHealth.Value > maxHealth.Value){
+                currentHealth.Value = maxHealth.Value;
+            }
+        }
+    }
+
 
     // A SERVER RPC IS A FUNCTION CALLED FROM A CLIENT TO THE SERVER (IN OUR CASE THE HOST)
     [ServerRpc]
